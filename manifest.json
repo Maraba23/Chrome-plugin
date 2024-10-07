@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Website analizer",
+    "version": "1.0",
+    "description": "This extension will analyze the website and check some security issues",
+    "permissions": [
+        "webRequest",
+        "webRequestBlocking",
+        "<all_urls>"
+      ],
+      "background": {
+        "scripts": ["background.js"],
+        "persistent": true
+      },
+    "browser_action": {
+      "default_popup": "plugin.html",
+      "default_icon": "icons/icon.png"
+    }
+}
