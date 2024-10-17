@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Detector de Segurança Web</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 600px;
+      margin: 0;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    #graph {
+      width: 100%;
+      height: 400px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+    }
+    .info-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .info-list li {
+      margin: 5px 0;
+      word-break: break-all;
+    }
+    .tab {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-right: 5px;
+      background-color: #e0e0e0;
+      cursor: pointer;
+    }
+    .tab.active {
+      background-color: #ffffff;
+      border-bottom: 2px solid #2196F3;
+    }
+    .content {
+      display: none;
+    }
+    .content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Detector de Segurança Web</h1>
+  <div class="section">
+    <div class="tab active" data-tab="graph">Conexões</div>
+    <div class="tab" data-tab="details">Detalhes</div>
+  </div>
+  <div id="graph" class="content active"></div>
+  <div id="details" class="content">
+    <div class="section">
+      <h2>Resumo de Segurança</h2>
+      <ul id="summaryList" class="info-list"></ul>
+    </div>    
+    <div class="section">
+      <h2>Operações de Armazenamento Local</h2>
+      <ul id="storageList" class="info-list"></ul>
+    </div>
+    <div class="section">
+      <h2>Cookies Detectados</h2>
+      <ul id="cookieList" class="info-list"></ul>
+    </div>
+    <div class="section">
+      <h2>Canvas Fingerprinting</h2>
+      <ul id="canvasList" class="info-list"></ul>
+    </div>
+  </div>
+  <script src="d3.v5.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
