@@ -1,7 +1,4 @@
-// popup.js
-
 document.addEventListener('DOMContentLoaded', function() {
-  // Abas (Tabs) para alternar entre o grafo e os detalhes
   const tabs = document.querySelectorAll('.tab');
   const contents = document.querySelectorAll('.content');
 
@@ -17,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Obter dados e gerar o grafo
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     let activeTab = tabs[0];
     let tabId = activeTab.id;
@@ -25,10 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let nodes = [];
     let links = [];
 
-    // Adicionar o nó do domínio atual
     nodes.push({ id: currentDomain, group: 1 });
 
-    // Obter domínios de terceira parte
     chrome.runtime.sendMessage({ message: "getThirdPartyDomains", tabId: tabId }, function(response) {
       if (response && response.length > 0) {
         response.forEach(function(domain) {
@@ -39,10 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
       generateGraph(nodes, links);
     });
 
-    // Obter outras informações para o resumo
     let summaryList = document.getElementById('summaryList');
 
-    // Ameaças potenciais
     chrome.runtime.sendMessage({ message: "getPotentialThreats", tabId: tabId }, function(response) {
       let summaryList = document.getElementById('summaryList');
       if (response && response.length > 0) {
@@ -62,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Operações de armazenamento local
     chrome.runtime.sendMessage({ message: "getLocalStorageOperations", tabId: tabId }, function(response) {
       let storageList = document.getElementById('storageList');
       if (response && response.length > 0) {
@@ -85,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Dados dos cookies
     chrome.runtime.sendMessage({ message: "getCookieData", tabId: tabId }, function(response) {
       let cookieList = document.getElementById('cookieList');
       if (response && response.length > 0) {
@@ -138,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Detecções de Canvas fingerprinting
     chrome.runtime.sendMessage({ message: "getCanvasFingerprintDetections", tabId: tabId }, function(response) {
       let canvasList = document.getElementById('canvasList');
       if (response && response.length > 0) {
@@ -156,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Função para gerar o grafo usando D3.js
 function generateGraph(nodes, links) {
   const width = 600;
   const height = 400;

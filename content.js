@@ -1,7 +1,4 @@
-// content.js
-
 (function() {
-    // Interceptação de redirecionamentos do cliente
     let originalAssign = window.location.assign;
     let originalReplace = window.location.replace;
     let originalHrefSet = Object.getOwnPropertyDescriptor(Location.prototype, 'href').set;
@@ -32,12 +29,10 @@
       }
     });
   
-    // Interceptação de operações no localStorage
     let originalSetItem = Storage.prototype.setItem;
     let originalRemoveItem = Storage.prototype.removeItem;
     let originalClear = Storage.prototype.clear;
   
-    // Intercepta setItem
     Storage.prototype.setItem = function(key, value) {
       chrome.runtime.sendMessage({
         message: "localStorageSet",
@@ -49,7 +44,6 @@
       return originalSetItem.apply(this, arguments);
     };
   
-    // Intercepta removeItem
     Storage.prototype.removeItem = function(key) {
       chrome.runtime.sendMessage({
         message: "localStorageRemove",
@@ -60,7 +54,6 @@
       return originalRemoveItem.apply(this, arguments);
     };
   
-    // Intercepta clear
     Storage.prototype.clear = function() {
       chrome.runtime.sendMessage({
         message: "localStorageClear",
@@ -70,7 +63,6 @@
       return originalClear.apply(this, arguments);
     };
   
-    // Monitoramento de atribuição direta (ex: localStorage['key'] = 'value')
     let originalSet = Object.getOwnPropertyDescriptor(Storage.prototype, 'setItem');
     if (originalSet && originalSet.writable) {
       Object.defineProperty(localStorage, 'setItem', {
@@ -81,9 +73,7 @@
       });
     }
   
-    // Interceptação de Canvas fingerprinting
     function interceptCanvasMethods() {
-      // Intercepta HTMLCanvasElement.prototype.toDataURL
       const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
       HTMLCanvasElement.prototype.toDataURL = function() {
         chrome.runtime.sendMessage({
@@ -95,7 +85,6 @@
         return originalToDataURL.apply(this, arguments);
       };
   
-      // Intercepta HTMLCanvasElement.prototype.toBlob
       const originalToBlob = HTMLCanvasElement.prototype.toBlob;
       HTMLCanvasElement.prototype.toBlob = function(callback, type, quality) {
         chrome.runtime.sendMessage({

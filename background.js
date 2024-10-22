@@ -1,12 +1,9 @@
-// background.js
-
 let thirdPartyDomains = {};
 let potentialThreats = {};
 let localStorageOperations = {};
 let cookieData = {};
 let canvasFingerprintDetections = {};
 
-// Função para verificar se um domínio é de terceira parte
 function isThirdParty(requestDomain, tabDomain) {
   return (
     requestDomain !== tabDomain &&
@@ -15,7 +12,6 @@ function isThirdParty(requestDomain, tabDomain) {
   );
 }
 
-// Detecta cookies no cabeçalho de resposta
 chrome.webRequest.onHeadersReceived.addListener(
   function(details) {
     let tabId = details.tabId;
@@ -63,7 +59,6 @@ chrome.webRequest.onHeadersReceived.addListener(
   ["responseHeaders"]
 );
 
-// Função para analisar o cabeçalho Set-Cookie
 function parseSetCookieHeader(cookieString) {
   let cookie = {};
   let parts = cookieString.split(';');
@@ -80,7 +75,6 @@ function parseSetCookieHeader(cookieString) {
   return cookie;
 }
 
-// Detecta conexões a domínios de terceira parte
 chrome.webRequest.onBeforeRequest.addListener(
   function(details) {
     let requestUrl = new URL(details.url);
@@ -105,7 +99,6 @@ chrome.webRequest.onBeforeRequest.addListener(
   []
 );
 
-// Detecta redirecionamentos HTTP (lado do servidor)
 chrome.webRequest.onHeadersReceived.addListener(
   function(details) {
     let tabId = details.tabId;
@@ -127,7 +120,6 @@ chrome.webRequest.onHeadersReceived.addListener(
   ["responseHeaders"]
 );
 
-// Recebe mensagens do content script
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   let tabId = sender.tab ? sender.tab.id : null;
 
