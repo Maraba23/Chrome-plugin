@@ -138,7 +138,7 @@ Contribuições são bem-vindas! Se você deseja melhorar esta extensão, siga o
 2. **Clone o Repositório Forkado**:
 
    ```bash
-   git clone https://github.com/seu-usuario/detector-de-seguranca-web.git
+   git clone https://github.com/Maraba23/Chrome-plugin.git
     ```
 
 3. **Crie uma Nova Branch**:
