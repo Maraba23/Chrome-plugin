@@ -173,6 +173,3 @@ Contribuições são bem-vindas! Se você deseja melhorar esta extensão, siga o
 ## **Licença**
 
 Este projeto está licenciado sob a Licença GNU GENERAL PUBLIC LICENSE - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
